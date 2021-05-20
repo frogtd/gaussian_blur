@@ -44,12 +44,13 @@ pub fn rotate_90_counterclockwise(height: usize, width: usize, vector: Vec<u8>) 
 /// [1, 1, 2, 3, 6, 8, 12, 15, 19, 23, 25, 26, 25, 23, 19, 15, 12, 8, 6, 3, 2, 1, 1]
 /// ```
 pub fn horz_gauss_blur<const N: usize>(
-    _height: usize,
+    height: usize,
     width: usize,
     middle: usize,
     kernel: [usize; N],
     raw: &[u8],
 ) -> Vec<u8> {
+    assert_eq!(height * width * 3, raw.len());
     let horz_vec: Vec<_> = raw
         .chunks(width * 3)
         .enumerate()
@@ -86,7 +87,6 @@ pub fn horz_gauss_blur<const N: usize>(
         .collect();
     horz_vec
 }
-
 
 /// Blurs image consisting of a Vec<u8> of RGB values.
 /// Good kernels:
