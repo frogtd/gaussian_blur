@@ -13,9 +13,7 @@ mod tests {
         let img = Reader::open("test_image.jpg")?.decode()?.to_rgb8();
         let (width, height) = (img.width() as usize, img.height() as usize);
         let raw = img.into_raw();
-        b.iter(|| {
-            blur(height, width, kernel, raw.clone())
-        });
+        b.iter(|| blur(height, width, kernel, raw.clone()));
         Ok(())
     }
 }
